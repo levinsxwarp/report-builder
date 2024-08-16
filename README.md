@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Ad Campaign Report Builder
 
-## Getting Started
+## Table of Contents
 
-First, run the development server:
+- [Ad Campaign Report Builder](#ad-campaign-report-builder)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Scripts](#scripts)
+  - [Dependencies](#dependencies)
+    - [Dev Dependencies](#dev-dependencies)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Ad Campaign Report Builder** is a single-page application (SPA) built with Next.js and React. The application allows users to create dynamic reports by dragging and dropping various metrics into a customizable grid layout. The application supports chart rendering, PDF generation, and a responsive design.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Drag and Drop Report Creation:** Easily drag and drop metrics into the report layout.
+- **Customizable Grid Layout:** Powered by `react-grid-layout`, the grid layout adapts dynamically based on user interaction.
+- **Chart Rendering:** Supports various chart types using `Chart.js`.
+- **PDF Export:** Export your reports as PDF documents with `html2canvas` and `jspdf`.
+- **Responsive Design:** Ensures a seamless experience across different devices.
 
-## Learn More
+## Installation
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   git clone https://github.com/levinsxwarp/report-builder.git
+   cd report-builder
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. Install the dependencies:
 
-## Deploy on Vercel
+   ```bash
+   npm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Usage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+2. Open your browser and navigate to `http://localhost:3000` to view the application.
+
+3. To build the application for production:
+
+   ```bash
+   npm run build
+   ```
+
+4. To start the production server:
+
+   ```bash
+   npm start
+   ```
+
+## Scripts
+
+- **`npm run dev`**: Starts the development server.
+- **`npm run build`**: Builds the application for production.
+- **`npm start`**: Starts the production server.
+
+## Dependencies
+
+- **@floating-ui/react**: UI positioning library.
+- **@iconify/react**: Icon library for React.
+- **axios**: Promise-based HTTP client.
+- **chart.js**: JavaScript library for creating charts.
+- **classnames**: Utility for conditionally joining classNames.
+- **html2canvas**: Screenshots with JavaScript.
+- **jspdf**: PDF generation for JavaScript.
+- **next**: React framework with hybrid static & server rendering, and route pre-fetching.
+- **react**: A JavaScript library for building user interfaces.
+- **react-dnd**: Drag and Drop for React.
+- **react-grid-layout**: A draggable and resizable grid layout with responsive breakpoints.
+
+### Dev Dependencies
+
+- **@typescript-eslint/eslint-plugin**: Linting for TypeScript with ESLint.
+- **eslint**: JavaScript and TypeScript linter.
+- **eslint-config-next**: ESLint configuration used by Next.js.
+- **eslint-config-standard-with-typescript**: Standard JS with TypeScript support.
+- **tailwindcss**: Utility-first CSS framework.
+- **typescript**: TypeScript language support.
