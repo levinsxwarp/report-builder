@@ -11,6 +11,7 @@
   - [Scripts](#scripts)
   - [Dependencies](#dependencies)
     - [Dev Dependencies](#dev-dependencies)
+  - [Demo Video](#demo-video)
 
 ## Overview
 
@@ -89,3 +90,9 @@
 - **eslint-config-standard-with-typescript**: Standard JS with TypeScript support.
 - **tailwindcss**: Utility-first CSS framework.
 - **typescript**: TypeScript language support.
+
+## Demo Video
+
+Watch the demo video to see the **Ad Campaign Report Builder** in action:
+
+https://www.loom.com/share/b2d70731da344c20a4e4392da98df193?sid=ac7e9343-f8fc-40b7-a5ca-39eb0701e484
