@@ -1,5 +1,6 @@
+import React, { useEffect, useRef } from "react";
 import { Chart, ChartData, ChartOptions, registerables } from "chart.js";
-import { useEffect, useRef } from "react";
+import isEqual from "@/utils/isEqual";
 
 // Register all necessary Chart.js components globally
 Chart.register(...registerables);
@@ -10,45 +11,56 @@ type ChartComponentProps = {
   options?: ChartOptions; // Optional configuration for the chart
 };
 
-const ChartComponent: React.FC<ChartComponentProps> = ({
-  type,
-  data,
-  options,
-}) => {
-  const chartRef = useRef<HTMLCanvasElement | null>(null);
-  const chartInstanceRef = useRef<Chart | null>(null);
+const ChartComponent: React.FC<ChartComponentProps> = React.memo(
+  ({ type, data, options }) => {
+    const chartRef = useRef<HTMLCanvasElement | null>(null);
+    const chartInstanceRef = useRef<Chart | null>(null);
 
-  useEffect(() => {
-    if (chartRef.current) {
-      // Destroy existing chart instance if it exists
-      if (chartInstanceRef.current) {
-        chartInstanceRef.current.destroy();
+    useEffect(() => {
+      console.log("====>useEffect");
+      if (chartRef.current) {
+        if (chartInstanceRef.current && chartInstanceRef.current.canvas) {
+          const updatedOptions: ChartOptions = {
+            ...options,
+            animation: {
+              duration: 0, // Set animation duration to 0 to disable animation
+              ...(options?.animation ?? {}), // Allow overriding via props
+            },
+          };
+          chartInstanceRef.current.config.data = data;
+          chartInstanceRef.current.config.options = updatedOptions;
+          chartInstanceRef.current.update();
+        } else {
+          // Create a new chart instance with the provided type, data, and options
+          chartInstanceRef.current = new Chart(chartRef.current, {
+            type,
+            data,
+            options,
+          });
+        }
       }
-      // Disable animations by default, but allow override via props
-      const updatedOptions: ChartOptions = {
-        ...options,
-        animation: {
-          duration: 0, // Set animation duration to 0 to disable animation
-          ...(options?.animation ?? {}), // Allow overriding via props
-        },
+    }, [type, data, options]);
+
+    useEffect(() => {
+      return () => {
+        if (chartInstanceRef.current) {
+          console.log("====>destroy");
+          chartInstanceRef.current.destroy();
+        }
       };
+    }, []);
 
-      // Create a new chart instance with the provided type, data, and options
-      chartInstanceRef.current = new Chart(chartRef.current, {
-        type,
-        data,
-        options: updatedOptions,
-      });
-    }
+    return <canvas ref={chartRef} className="w-full h-full" />;
+  },
+  (prevProps, nextProps) => {
+    return (
+      prevProps.type === nextProps.type &&
+      isEqual(prevProps.data, nextProps.data) &&
+      isEqual(prevProps.options, nextProps.options)
+    );
+  }
+);
 
-    return () => {
-      if (chartInstanceRef.current) {
-        chartInstanceRef.current.destroy();
-      }
-    };
-  }, [type, data, options]); // Re-run effect when chart type, data, or options change
-
-  return <canvas ref={chartRef} className="w-full h-full" />;
-};
+ChartComponent.displayName = "ChartComponent";
 
 export default ChartComponent;

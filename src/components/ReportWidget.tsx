@@ -1,5 +1,11 @@
 import { Icon } from "@iconify/react";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import ChartComponent from "./ChartComponent";
 import { ChartData, ChartOptions } from "chart.js";
 import { WidgetType } from "@/contexts/WidgetContext";
@@ -76,10 +82,6 @@ const ReportWidget: React.FC<ReportWidgetProps> = ({
 
   // Render the appropriate content based on the widget type
   const renderChart = () => {
-    if (!data) {
-      return <div>No data available</div>;
-    }
-
     if (type === "number") {
       return (
         <div
